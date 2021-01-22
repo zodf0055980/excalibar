@@ -31,7 +31,7 @@ StatusBar::StatusBar(Display* dpy)
       font_(XLoadQueryFont(dpy_, "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*")),
       root_window_(DefaultRootWindow(dpy_)),
       bar_window_(XCreateSimpleWindow(dpy_, root_window_, 0, GetDisplayResolution().second - 30, GetDisplayResolution().first, 30, 0, bg_color_, bg_color_)),
-      //gc_(XCreateGC(dpy_, bar_window_, 0, None)),
+      gc_(XCreateGC(dpy_, bar_window_, 0, None)),
       prop_(::std::make_unique<Properties>(dpy_)),
       colors_(),
       modules_() {
@@ -46,7 +46,6 @@ StatusBar::StatusBar(Display* dpy)
   XSelectInput(dpy, bar_window_, StructureNotifyMask | ExposureMask);
 
   XMapWindow(dpy_, bar_window_);
-  gc_ = XCreateGC(dpy_, bar_window_, 0, None);
 
   // Wait for the MapNotify event
   XEvent event;
