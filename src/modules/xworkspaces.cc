@@ -5,8 +5,6 @@ extern "C" {
 #include <X11/Xutil.h>
 }
 
-#include <iostream>
-
 namespace excalibar {
 
 XWorkspaces::XWorkspaces(Display* dpy,
@@ -31,7 +29,6 @@ void XWorkspaces::Update() {
         False, XA_CARDINAL, &da, &di, &atom_len, &remain, &prop_ret) == Success &&
       prop_ret) {
     number_of_desktops = *(reinterpret_cast<unsigned long*>(prop_ret));
-    ::std::cout << "number of desktops: " << number_of_desktops << ::std::endl;
   }
 
   int current_desktop = 0;
@@ -39,7 +36,6 @@ void XWorkspaces::Update() {
         False, XA_CARDINAL, &da, &di, &atom_len, &remain, &prop_ret) == Success &&
       prop_ret) {
     current_desktop = *(reinterpret_cast<unsigned long*>(prop_ret));
-    ::std::cout << "current_desktop: " << current_desktop << ::std::endl;
   }
 
   text_.clear();

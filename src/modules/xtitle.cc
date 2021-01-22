@@ -5,8 +5,6 @@ extern "C" {
 #include <X11/Xutil.h>
 }
 
-#include <iostream>
-
 namespace excalibar {
 
 XTitle::XTitle(Display* dpy,
@@ -30,7 +28,6 @@ void XTitle::Update() {
         False, XA_WINDOW, &da, &di, &atom_len, &remain, &prop_ret) == Success &&
       prop_ret) {
     Window* active_window = reinterpret_cast<Window*>(prop_ret);
-    ::std::cout << "_NET_ACTIVE_WINDOW: " << *active_window << ::std::endl;
 
     XTextProperty name;
     if (!XGetTextProperty(dpy_, *active_window, &name, prop_->net[atom::NET_WM_NAME]) || !name.nitems) {
@@ -40,7 +37,6 @@ void XTitle::Update() {
 
     text_ = reinterpret_cast<char*>(name.value);
     XFree(name.value);
-    ::std::cout << "_NET_ACTIVE_WINDOW._NET_WM_NAME: " << text_ << ::std::endl;
   }
 }
 

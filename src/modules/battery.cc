@@ -24,8 +24,9 @@ Battery::Battery(Display* dpy,
 
 
 void Battery::Update() {
-  text_.clear();
+  text_ = "BAT: ";
   char buf[256];
+  ::std::memset(buf, 0, sizeof(buf));
 
   int status;
   pid_t pid;
@@ -59,10 +60,12 @@ void Battery::Update() {
 
       for (int i = 0; i < (int) sizeof(buf); i++) {
         if (buf[i] == '%') {
-          text_.push_back(buf[i - 3]);
-          text_.push_back(buf[i - 2]);
-          text_.push_back(buf[i - 1]);
-          text_.push_back(buf[i]);
+          if (buf[i - 3] != ' ') {
+            text_ += buf[i - 3];
+          }
+          text_ += buf[i - 2];
+          text_ += buf[i - 1];
+          text_ += buf[i];
           break;
         }
       }
