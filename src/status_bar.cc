@@ -64,7 +64,7 @@ StatusBar::StatusBar(Display* dpy)
 
   ADD_MODULE(Clock, GetDisplayResolution().first - 100, 20);
   ADD_MODULE(Battery, GetDisplayResolution().first - 175, 20);
-  ADD_MODULE(XTitle, 300, 20);
+  ADD_MODULE(XTitle, 215, 20);
   ADD_MODULE(XWorkspaces, 15, 20);
 
   XFlush(dpy_);
