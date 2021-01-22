@@ -5,10 +5,14 @@
 extern "C" {
 #include <X11/Xlib.h>
 }
+#include <vector>
+#include <string>
 #include <memory>
 #include <utility>
+#include <unordered_map>
 
 #include "properties.h"
+#include "modules/module.h"
 
 namespace excalibar {
 
@@ -18,20 +22,26 @@ class StatusBar {
   virtual ~StatusBar();
 
   void Run();
-
+  
  private:
   StatusBar(Display* dpy);
 
+  void Update();
   ::std::pair<int, int> GetDisplayResolution() const;
+  unsigned long AllocateColor(const ::std::string& color_hex);
 
   Display* dpy_;
+  int screen_;
   int bg_color_;
   int fg_color_;
+  XFontStruct* font_;
   Window root_window_;
   Window bar_window_;
   GC gc_;  // graphical context
 
   ::std::unique_ptr<Properties> prop_;
+  ::std::unordered_map<::std::string, unsigned long> colors_;
+  ::std::vector<::std::unique_ptr<Module>> modules_;
 };
 
 }  // namespace excalibar
