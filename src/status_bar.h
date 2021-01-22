@@ -25,13 +25,13 @@ class StatusBar {
   ::std::pair<int, int> GetDisplayResolution() const;
 
   Display* dpy_;
-	int bg_color_;
-	int fg_color_;
+  int bg_color_;
+  int fg_color_;
   Window root_window_;
   Window bar_window_;
-	GC gc_;  // graphical context
+  GC gc_;  // graphical context
 
-	::std::unique_ptr<Properties> prop_;
+  ::std::unique_ptr<Properties> prop_;
 };
 
 }  // namespace excalibar
