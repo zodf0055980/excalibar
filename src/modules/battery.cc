@@ -10,6 +10,7 @@ extern "C" {
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 namespace excalibar {
 
